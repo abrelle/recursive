@@ -20,15 +20,17 @@ def getGraphFromFile(fileName):
 
 def writeGraph(graph, maxSet):
     f = open("results.txt", "w")
-    f.write("List of edges:\n")
-    for edge in graph.edges:
-        stringEdges = "( " + str(edge[0]) + " - " + str(edge[1]) + " ), "
-        f.write(stringEdges)
 
     f.write("\nNumber of nodes in maximum independent set: ")
     f.write(str(len(maxSet)))
     f.write("\nMaximum independent set: ")
     f.write(" ".join(str(node) for node in maxSet))
+
+    f.write("\nList of edges:\n")
+    for edge in graph.edges:
+        stringEdges = str(edge[0]) + " " + str(edge[1]) + '\n'
+        f.write(stringEdges)
+
     f.close()
 
 
@@ -54,6 +56,10 @@ def maxSet(graph, nodes):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 4:
+        print("Wrong arguments")
+        sys.exit()
+
     mode = sys.argv[1]
     if mode == "-f":
         graph = getGraphFromFile(sys.argv[2])
